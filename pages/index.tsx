@@ -9,19 +9,18 @@ type HomeProps = {
 
 const Home: NextPage<HomeProps> = ({ art }) => {
   return (
-    <div className={styles.container}>
+    <div className="h-full w-full">
       <Head>
-        <title>hi :)</title>
+        <title>.... .. / ---... -.--.-</title>
         <meta name="description" content="hi :)" />
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>"
-        />
+        <link rel="icon" href="favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <div className={styles.content}>
-          <pre className={styles.art}>{art}</pre>
+      <main className="bg-dark h-full w-full grid grid-rows-3 items-center justify-center">
+        <div className="row-start-2">
+          <pre className="text-pink text-glow font-bold select-none text-[0.2rem] md:text-[0.4rem] leading-[1.25]">
+            {art}
+          </pre>
         </div>
       </main>
     </div>
