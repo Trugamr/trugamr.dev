@@ -1,10 +1,13 @@
 import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import figlet from 'figlet'
+import { colorFromTime } from '../utils/color'
 
 type HomeProps = {
-  art: string | undefined
+  art: {
+    text: string | undefined
+    color: string
+  }
 }
 
 const Home: NextPage<HomeProps> = ({ art }) => {
@@ -13,13 +16,19 @@ const Home: NextPage<HomeProps> = ({ art }) => {
       <Head>
         <title>.... .. / ---... -.--.-</title>
         <meta name="description" content="hi :)" />
-        <link rel="icon" href="favicon.ico" />
+        <link
+          rel="icon"
+          href={`data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="${art.color}" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4 17h-8v-2h8v2zm-.499-6.296l-1.298 1.296-1.203-1.204 1.298-1.296-1.298-1.296 1.203-1.204 1.298 1.296 1.296-1.296 1.203 1.204-1.297 1.296 1.297 1.296-1.202 1.204-1.297-1.296zm-7 0l-1.298 1.296-1.203-1.204 1.298-1.296-1.298-1.296 1.203-1.204 1.298 1.296 1.296-1.296 1.203 1.204-1.297 1.296 1.297 1.296-1.202 1.204-1.297-1.296z" /></svg>`}
+        />
       </Head>
 
       <main className="bg-dark h-full w-full grid grid-rows-3 items-center justify-center">
         <div className="row-start-2">
-          <pre className="text-pink text-glow font-bold select-none text-[0.2rem] md:text-[0.4rem] leading-[1.25]">
-            {art}
+          <pre
+            className="text-glow font-bold select-none text-[0.2rem] md:text-[0.4rem] leading-[1.25]"
+            style={{ color: art.color }}
+          >
+            {art.text}
           </pre>
         </div>
       </main>
@@ -29,8 +38,8 @@ const Home: NextPage<HomeProps> = ({ art }) => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps<{ art: string | undefined }> = async () => {
-  const art = await new Promise<string | undefined>((resolve, reject) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const text = await new Promise<string | undefined>((resolve, reject) => {
     figlet.text('trugamr.dev', { font: 'Fraktur' }, (error, result) => {
       if (error) {
         return reject(error)
@@ -39,9 +48,12 @@ export const getStaticProps: GetStaticProps<{ art: string | undefined }> = async
     })
   })
 
+  const color = colorFromTime({ time: new Date() })
+
   return {
     props: {
-      art,
+      art: { text, color },
     },
+    revalidate: 30,
   }
 }
