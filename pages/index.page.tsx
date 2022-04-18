@@ -10,9 +10,9 @@ type HomeProps = {
   }
 }
 
-const Home: NextPage<HomeProps> = ({ art }) => {
+export default function Home({ art }: HomeProps) {
   return (
-    <div className="h-full w-full">
+    <div className="w-full h-full">
       <Head>
         <title>.... .. / ---... -.--.-</title>
         <meta name="description" content="hi :)" />
@@ -22,7 +22,7 @@ const Home: NextPage<HomeProps> = ({ art }) => {
         />
       </Head>
 
-      <main className="bg-dark h-full w-full grid grid-rows-3 items-center justify-center">
+      <main className="grid items-center justify-center w-full h-full grid-rows-3 bg-dark">
         <div className="row-start-2">
           <pre
             className="text-glow font-bold select-none text-[0.2rem] md:text-[0.4rem] leading-[1.25]"
@@ -35,8 +35,6 @@ const Home: NextPage<HomeProps> = ({ art }) => {
     </div>
   )
 }
-
-export default Home
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const text = await new Promise<string | undefined>((resolve, reject) => {
