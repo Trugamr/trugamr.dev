@@ -1,4 +1,4 @@
-import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import type { GetStaticProps } from 'next'
 import Head from 'next/head'
 import figlet from 'figlet'
 import { colorFromTime } from '../utils/color'
@@ -12,7 +12,7 @@ type HomeProps = {
 
 export default function Home({ art }: HomeProps) {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <Head>
         <title>.... .. / ---... -.--.-</title>
         <meta name="description" content="hi :)" />
@@ -22,10 +22,10 @@ export default function Home({ art }: HomeProps) {
         />
       </Head>
 
-      <main className="grid items-center justify-center w-full h-full grid-rows-3 bg-dark">
+      <main className="grid h-full w-full grid-rows-3 items-center justify-center bg-dark">
         <div className="row-start-2">
           <pre
-            className="text-glow font-bold select-none text-[0.2rem] md:text-[0.4rem] leading-[1.25]"
+            className="text-glow select-none text-[0.2rem] font-bold leading-[1.25] md:text-[0.4rem]"
             style={{ color: art.color }}
           >
             {art.text}
