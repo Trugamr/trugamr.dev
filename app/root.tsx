@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from '@remix-run/server-runtime'
 import {
   Links,
   LiveReload,
@@ -13,7 +13,7 @@ import ThemeProvider, { Theme, useTheme } from '~/providers/theme.provider'
 export const meta: MetaFunction = () => {
   return {
     charset: 'utf-8',
-    title: 'trugamr x_x',
+    title: '.... .. / ---... -.--.-',
     viewport: 'width=device-width,initial-scale=1',
   }
 }
@@ -26,7 +26,7 @@ function App() {
         <Meta />
         <Links />
       </head>
-      <body className="flex-grow bg-white text-black dark:bg-black dark:text-white">
+      <body className="flex-grow bg-white text-coal-900 dark:bg-coal-900 dark:text-white">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
