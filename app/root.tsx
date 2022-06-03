@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/server-runtime'
+import type { MetaFunction, LinksFunction } from '@remix-run/server-runtime'
 import {
   Links,
   LiveReload,
@@ -13,9 +13,14 @@ import ThemeProvider, { Theme, useTheme } from '~/providers/theme.provider'
 export const meta: MetaFunction = () => {
   return {
     charset: 'utf-8',
-    title: '.... .. / ---... -.--.-',
     viewport: 'width=device-width,initial-scale=1',
+    title: '.... .. / ---... -.--.-',
+    description: "trugamr's little corner of the internet x_x",
   }
+}
+
+export const links: LinksFunction = () => {
+  return [{ rel: 'icon', href: '/favicon.ico' }]
 }
 
 function App() {
