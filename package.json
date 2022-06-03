@@ -12,6 +12,7 @@
     "@remix-run/serve": "^1.5.1",
     "@twind/preset-autoprefix": "^1.0.0-next.38",
     "@twind/preset-tailwind": "^1.0.0-next.38",
+    "date-fns": "^2.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "twind": "^1.0.0-next.38"
