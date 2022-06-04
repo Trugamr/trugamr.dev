@@ -10,6 +10,7 @@ export const loader: LoaderFunction = () => {
   return new Response(icon, {
     headers: {
       'Content-Type': 'image/svg+xml',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
     },
   })
 }
