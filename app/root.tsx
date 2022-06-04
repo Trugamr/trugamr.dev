@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
     charset: 'utf-8',
     viewport: 'width=device-width,initial-scale=1',
     title: '.... .. / ---... -.--.-',
-    description: "trugamr's little corner of the internet x_x",
+    description: "trugamr's little corner on the internet x_x",
   }
 }
 
