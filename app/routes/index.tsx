@@ -13,9 +13,7 @@ export const loader: LoaderFunction = () => {
   const decoded = Buffer.from(encoded, 'base64').toString('utf8')
   const data: LoaderData = {
     decoded,
-    color: colorFromDate({
-      date: new Date(),
-    }),
+    color: colorFromDate(new Date()),
   }
   return data
 }
