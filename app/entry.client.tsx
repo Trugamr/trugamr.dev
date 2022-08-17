@@ -1,8 +1,24 @@
+import { startTransition, StrictMode } from 'react'
 import { RemixBrowser } from '@remix-run/react'
-import { hydrate } from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 import { configure } from '~/lib/twind'
 
 // Configure twind
 configure()
 
-hydrate(<RemixBrowser />, document)
+function hydrate() {
+  startTransition(() => {
+    hydrateRoot(
+      document,
+      <StrictMode>
+        <RemixBrowser />
+      </StrictMode>,
+    )
+  })
+}
+
+if (window.requestIdleCallback) {
+  window.requestIdleCallback(hydrate)
+} else {
+  window.setTimeout(hydrate, 1)
+}
