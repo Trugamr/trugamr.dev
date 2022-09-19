@@ -1,8 +1,4 @@
 import { RemixBrowser } from '@remix-run/react'
-import { hydrate } from 'react-dom'
-import { configure } from '~/lib/twind'
+import { hydrateRoot } from 'react-dom/client'
 
-// Configure twind
-configure()
-
-hydrate(<RemixBrowser />, document)
+hydrateRoot(document, <RemixBrowser />)

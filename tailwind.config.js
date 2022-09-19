@@ -1,9 +1,6 @@
-import { defineConfig } from 'twind'
-import presetTailwind from '@twind/preset-tailwind'
-import presetAutoprefix from '@twind/preset-autoprefix'
-
-const config = defineConfig({
-  presets: [presetTailwind(), presetAutoprefix()],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./app/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -23,6 +20,5 @@ const config = defineConfig({
       },
     },
   },
-})
-
-export default config
+  plugins: [],
+}
