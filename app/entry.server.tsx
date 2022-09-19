@@ -1,11 +1,10 @@
+import { PassThrough } from 'stream'
 import type { EntryContext } from '@remix-run/node'
+import { Response } from '@remix-run/node'
 import { RemixServer } from '@remix-run/react'
-import { renderToString } from 'react-dom/server'
-import { inline } from 'twind'
-import { configure } from '~/lib/twind'
+import { renderToPipeableStream } from 'react-dom/server'
 
-// Configure twind
-configure()
+const ABORT_DELAY = 5000
 
 export default function handleRequest(
   request: Request,
@@ -13,17 +12,37 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  let markup = renderToString(
-    <RemixServer context={remixContext} url={request.url} />,
-  )
+  return new Promise((resolve, reject) => {
+    let didError = false
 
-  // Generate and inject styles
-  markup = inline(markup)
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        onShellReady: () => {
+          const body = new PassThrough()
 
-  responseHeaders.set('Content-Type', 'text/html')
+          responseHeaders.set('Content-Type', 'text/html')
 
-  return new Response('<!DOCTYPE html>' + markup, {
-    status: responseStatusCode,
-    headers: responseHeaders,
+          resolve(
+            new Response(body, {
+              headers: responseHeaders,
+              status: didError ? 500 : responseStatusCode,
+            }),
+          )
+
+          pipe(body)
+        },
+        onShellError: err => {
+          reject(err)
+        },
+        onError: error => {
+          didError = true
+
+          console.error(error)
+        },
+      },
+    )
+
+    setTimeout(abort, ABORT_DELAY)
   })
 }

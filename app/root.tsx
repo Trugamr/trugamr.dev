@@ -7,10 +7,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import { tx } from 'twind'
 import ThemeProvider, { Theme, useTheme } from '~/providers/theme.provider'
 import type { ExternalScriptsFunction } from 'remix-utils'
 import { ExternalScripts } from 'remix-utils'
+import styles from '~/styles/app.css'
+import classNames from 'classnames'
 
 export const meta: MetaFunction = () => {
   return {
@@ -22,7 +23,10 @@ export const meta: MetaFunction = () => {
 }
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'icon', href: '/favicon.ico' }]
+  return [
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'stylesheet', href: styles },
+  ]
 }
 
 export const scripts: ExternalScriptsFunction = () => {
@@ -42,7 +46,7 @@ export const handle = { scripts }
 function App() {
   const [theme] = useTheme()
   return (
-    <html lang="en" className={tx(theme, 'h-full flex')}>
+    <html lang="en" className={classNames(theme, 'flex h-full')}>
       <head>
         <Meta />
         <Links />

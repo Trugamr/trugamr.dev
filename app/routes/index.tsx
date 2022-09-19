@@ -1,6 +1,5 @@
 import type { LoaderFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import { css, tx } from 'twind'
 import { encoded } from '~/assets/art.server'
 import { colorFromDate } from '~/utils/color'
 
@@ -23,15 +22,10 @@ export default function IndexRoute() {
   const hsla = `hsla(${color.hue}, ${color.saturation}%, ${color.lightness}%, ${color.alpha})`
 
   return (
-    <main className="h-full flex items-center justify-center p-4">
+    <main className="flex h-full items-center justify-center p-4">
       <pre
-        className={tx(
-          'font-bold select-none text-[0.2rem] sm:text-[0.4rem] leading-[1.25]',
-          css`
-            text-shadow: 0rem 0rem 0.625rem currentColor;
-            color: ${hsla};
-          `,
-        )}
+        className="text-glow select-none text-[0.2rem] font-bold leading-[1.25] sm:text-[0.4rem]"
+        style={{ color: hsla }}
       >
         {decoded}
       </pre>
