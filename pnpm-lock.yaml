@@ -10,7 +10,7 @@ specifiers:
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
   autoprefixer: ^10.4.13
-  classnames: ^2.3.2
+  class-variance-authority: ^0.4.0
   date-fns: ^2.29.3
   eslint: ^8.34.0
   eslint-config-prettier: ^8.6.0
@@ -28,7 +28,7 @@ dependencies:
   '@remix-run/node': 1.13.0
   '@remix-run/react': 1.13.0_biqbaboplfbrettd7655fr4n2y
   '@remix-run/serve': 1.13.0
-  classnames: 2.3.2
+  class-variance-authority: 0.4.0_typescript@4.9.5
   date-fns: 2.29.3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2911,8 +2911,15 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /classnames/2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+  /class-variance-authority/0.4.0_typescript@4.9.5:
+    resolution: {integrity: sha512-74enNN8O9ZNieycac/y8FxqgyzZhZbxmCitAtAeUrLPlxjSd5zA7LfpprmxEcOmQBnaGs5hYhiSGnJ0mqrtBLQ==}
+    peerDependencies:
+      typescript: '>= 4.5.5 < 5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 4.9.5
     dev: false
 
   /clean-stack/2.2.0:

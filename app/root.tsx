@@ -11,7 +11,7 @@ import ThemeProvider, { Theme, useTheme } from '~/providers/theme.provider'
 import type { ExternalScriptsFunction } from 'remix-utils'
 import { ExternalScripts } from 'remix-utils'
 import styles from '~/styles/app.css'
-import classNames from 'classnames'
+import { cx } from 'class-variance-authority'
 
 export const meta: MetaFunction = () => {
   return {
@@ -46,7 +46,7 @@ export const handle = { scripts }
 function App() {
   const [theme] = useTheme()
   return (
-    <html lang="en" className={classNames(theme, 'flex h-full')}>
+    <html lang="en" className={cx(theme, 'flex h-full')}>
       <head>
         <Meta />
         <Links />
