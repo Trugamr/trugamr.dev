@@ -1,24 +1,17 @@
-import type { LoaderFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { encoded } from '~/assets/art.server'
 import { colorFromDate } from '~/utils/color'
 
-type LoaderData = {
-  decoded: string
-  color: ReturnType<typeof colorFromDate>
-}
-
-export const loader: LoaderFunction = () => {
-  const decoded = Buffer.from(encoded, 'base64').toString('utf8')
-  const data: LoaderData = {
-    decoded,
+export const loader = () => {
+  const art = Buffer.from(encoded, 'base64').toString('utf8')
+  return {
+    art,
     color: colorFromDate(new Date()),
   }
-  return data
 }
 
 export default function IndexRoute() {
-  const { decoded, color } = useLoaderData<LoaderData>()
+  const { art, color } = useLoaderData<typeof loader>()
   const hsla = `hsla(${color.hue}, ${color.saturation}%, ${color.lightness}%, ${color.alpha})`
 
   return (
@@ -27,7 +20,7 @@ export default function IndexRoute() {
         className="text-glow select-none text-[0.2rem] font-bold leading-[1.25] sm:text-[0.4rem]"
         style={{ color: hsla }}
       >
-        {decoded}
+        {art}
       </pre>
     </main>
   )
