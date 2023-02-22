@@ -1,5 +1,6 @@
 import { endOfDay, startOfDay } from 'date-fns'
 import { interpolate } from './interpolate'
+import color from 'color'
 
 type ColorFromDateOptions = {
   saturation?: number
@@ -18,5 +19,5 @@ export function colorFromDate(
     inputRange: [startOfDay(date).getTime(), endOfDay(date).getTime()],
     outputRange: [0, 720],
   })
-  return { hue: hue % 360, saturation, lightness, alpha }
+  return color.hsl(hue % 360, saturation, lightness).alpha(alpha)
 }
