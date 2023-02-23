@@ -12,13 +12,18 @@ import type { ExternalScriptsFunction } from 'remix-utils'
 import { ExternalScripts } from 'remix-utils'
 import styles from '~/styles/app.css'
 import { cx } from 'class-variance-authority'
+import { getEnv } from '~/utils/env.server'
 
-export const meta: MetaFunction = () => {
+const { SITE_URL } = getEnv()
+
+export const meta: MetaFunction = data => {
+  const ogImageUrl = new URL('./og/main.png', SITE_URL)
   return {
     charset: 'utf-8',
     viewport: 'width=device-width,initial-scale=1',
     title: '.... .. / ---... -.--.-',
     description: "trugamr's little corner on the internet x_x",
+    'og:image': ogImageUrl.href,
   }
 }
 
