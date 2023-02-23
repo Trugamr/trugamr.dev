@@ -4,6 +4,7 @@ import satori from 'satori'
 import { renderAsync } from '@resvg/resvg-js'
 import { encoded } from '~/assets/art.server'
 import { colorFromDate } from '~/utils/color'
+import { hoursToSeconds } from 'date-fns'
 
 export async function loader() {
   const art = Buffer.from(encoded, 'base64').toString('utf8')
@@ -59,7 +60,11 @@ export async function loader() {
   return new Response(png, {
     headers: {
       'Content-Type': 'image/png',
-      'Content-Disposition': 'inline',
+      'Content-Disposition': 'inline; filename="main.png"',
+      'Cache-Control': `public, immutable, no-transform, max-age=${hoursToSeconds(
+        6,
+      )}`,
+      'Content-Length': png.byteLength.toString(),
     },
   })
 }
