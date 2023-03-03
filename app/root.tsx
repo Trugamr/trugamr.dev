@@ -1,4 +1,5 @@
-import type { MetaFunction, LinksFunction } from '@remix-run/node'
+import type { MetaFunction, LinksFunction, LoaderArgs } from '@remix-run/node'
+import { json } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -12,12 +13,10 @@ import type { ExternalScriptsFunction } from 'remix-utils'
 import { ExternalScripts } from 'remix-utils'
 import styles from '~/styles/app.css'
 import { cx } from 'class-variance-authority'
-import { getEnv } from '~/utils/env.server'
+import { getSiteUrl } from '~/utils/general'
 
-const { SITE_URL } = getEnv()
-
-export const meta: MetaFunction = data => {
-  const ogImageUrl = new URL('./og/main.png', SITE_URL)
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const ogImageUrl = new URL('./og/main.png', data.requestInfo.origin)
   return {
     charset: 'utf-8',
     viewport: 'width=device-width,initial-scale=1',
@@ -25,6 +24,14 @@ export const meta: MetaFunction = data => {
     description: "trugamr's little corner on the internet x_x",
     'og:image': ogImageUrl.href,
   }
+}
+
+export const loader = ({ request }: LoaderArgs) => {
+  return json({
+    requestInfo: {
+      origin: getSiteUrl(request),
+    },
+  })
 }
 
 export const links: LinksFunction = () => {
